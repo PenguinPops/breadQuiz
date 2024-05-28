@@ -65,11 +65,6 @@ let results = [
     }
 ]
 
-let currentQuestion;
-let ansTable;
-
-
-
 function loadQuestion() {
     const questionData = quizData[currentQuestion];
     document.getElementById('question').innerText = questionData.question;
@@ -114,24 +109,29 @@ function selectAnswer(answer) {
     }, 600);
 }
 
+let currentQuestion;
+let ansTable;
+
 function checkQuiz() {
+    
     if(localStorage.getItem("qStatus") === 'done'){
         const result = localStorage.getItem("qResult");
         showResult(results[result]);
     }
     else if(localStorage.getItem("qStatus") === 'inprog') {
-        loadQuestion();
         const storedAnsTable = localStorage.getItem('ansTable');
         if (storedAnsTable) {
             ansTable = JSON.parse(storedAnsTable);
         }
-        currentQuestion = localStorage.getItem('currentQuestion');
+        currentQuestion = parseInt(localStorage.getItem('currentQuestion'));
+        loadQuestion();
     }
     else {
         currentQuestion = 0;
         ansTable = [0,0,0,0];
         let qStatus = 'inprog';
         localStorage.setItem("qStatus", qStatus);
+        localStorage.setItem("currentQuestion", currentQuestion);
         loadQuestion();
     }
 }
