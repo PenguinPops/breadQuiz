@@ -1,5 +1,4 @@
-const quizData = [
-    {
+const quizData = [{
         image: "https://images.unsplash.com/photo-1533782654613-826a072dd6f3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YnJlYWQlMjBhbGwlMjB0eXBlc3xlbnwwfHwwfHx8MA%3D%3D",
         question: "Który z tych kolorów lubisz najbardziej?",
         answers: {
@@ -42,8 +41,7 @@ const quizData = [
 ];
 
 
-let results = [
-    {
+let results = [{
         image: "https://images.unsplash.com/photo-1611269971682-4d093e7c8f63?q=80&w=1287",
         title: "Chleb żytni",
         content: "Twój chleb to chleb żytni, ponieważ cenisz sobie tradycję i wyraziste smaki. Jesteś osobą, która docenia zdrowe i pożywne jedzenie, a jednocześnie lubi eksperymentować z różnorodnymi dodatkami."
@@ -56,7 +54,7 @@ let results = [
     {
         image: "https://images.unsplash.com/photo-1598373182133-52452f7691ef?q=80&w=1170",
         title: "Chleb pszenny",
-        content: "Twój chleb to chleb pszenny, ponieważ preferujesz klasykę i uniwersalność w kuchni. Jesteś osobą, która ceni sobie prostotę i możliwość komponowania różnorodnych potraw, zarówno słodkich, jak i słonych."
+        content: "Twój chleb to chleb pszenny ponieważ preferujesz klasykę i uniwersalność w kuchni. Jesteś osobą, która ceni sobie prostotę i możliwość komponowania różnorodnych potraw, zarówno słodkich, jak i słonych."
     },
     {
         image: "https://images.unsplash.com/photo-1632931057819-4eefffa8e007?q=80&w=1287",
@@ -113,22 +111,20 @@ let currentQuestion;
 let ansTable;
 
 function checkQuiz() {
-    
-    if(localStorage.getItem("qStatus") === 'done'){
+
+    if (localStorage.getItem("qStatus") === 'done') {
         const result = localStorage.getItem("qResult");
         showResult(results[result]);
-    }
-    else if(localStorage.getItem("qStatus") === 'inprog') {
+    } else if (localStorage.getItem("qStatus") === 'inprog') {
         const storedAnsTable = localStorage.getItem('ansTable');
         if (storedAnsTable) {
             ansTable = JSON.parse(storedAnsTable);
         }
         currentQuestion = parseInt(localStorage.getItem('currentQuestion'));
         loadQuestion();
-    }
-    else {
+    } else {
         currentQuestion = 0;
-        ansTable = [0,0,0,0];
+        ansTable = [0, 0, 0, 0];
         let qStatus = 'inprog';
         localStorage.setItem("qStatus", qStatus);
         localStorage.setItem("currentQuestion", currentQuestion);
